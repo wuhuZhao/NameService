@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+message Response {
+  string msg = 1;
+  int32 code = 2;
+  string request_id =3;
+}
+
+message Meta {
+  string nameService = 1;
+  string ip = 2;
+  string port = 3;
+}
+
+message MetaRequest {
+  Meta meta = 1;
+}
+
+message MetaResponse {
+  Response resp = 1;
+}
+
+message MetaQueryRequest {
+  string nameService = 1;
+}
+
+message MetaQueryResponse {
+  Response resp = 1;
+  Meta meta= 2;
+}
+
+service NameService {
+  rpc registerService(MetaRequest) returns (MetaResponse);
+  rpc queryService(MetaQueryRequest) returns (MetaQueryResponse);
+}
